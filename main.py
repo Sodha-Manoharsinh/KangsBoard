@@ -295,14 +295,14 @@ def profile():
 
 @app.route('/kang_admin_8971_secret', methods=['GET','POST'])
 def secret_admin():
-    key = request.form.get("key") 
+    key = request.args.get("key")
+
     if key != ADMIN_SECRET:
         return "Unauthorized", 403
 
     users = User.select()
     projects = Project.select()
     return render_template("admin.html", users=users, projects=projects)
-
 
 @app.route('/admin/delete-user/<int:user_id>')
 def admin_delete_user(user_id):
