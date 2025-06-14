@@ -293,7 +293,7 @@ def profile():
     project_count = Project.select().where(Project.user == user).count()
     return render_template("profile.html", user=user, project_count=project_count)
 
-@app.route('/kang_admin_8971_secret', methods=['POST'])
+@app.route('/kang_admin_8971_secret', methods=['GET','POST'])
 def secret_admin():
     key = request.form.get("key") 
     if key != ADMIN_SECRET:
