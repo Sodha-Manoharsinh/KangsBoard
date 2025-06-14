@@ -14,7 +14,7 @@ app.secret_key = "Kangaroos"
 
 
 load_dotenv()
-ADMIN_SECRET = os.getenv("ADMIN_SECRET_KEY")
+ADMIN_SECRET = str(os.getenv("ADMIN_SECRET_KEY"))
 
 
 # it is used to pass context
