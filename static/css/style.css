@@ -1,0 +1,134 @@
+/* === BODY BACKGROUND & TEXT === */
+body {
+  background: linear-gradient(to right, rgba(22, 39, 68, 255), #3a4860);
+  color: #fff;
+}
+
+/* === CARD COMPONENTS === */
+.card {
+  background-color: rgb(35, 51, 78); /* Card background */
+  color: rgb(191, 195, 204); /* Text color */
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-title {
+  color: rgb(68, 170, 250);
+  font-weight: bold;
+}
+
+.card-text {
+  color: rgb(191, 195, 204);
+}
+
+.card-footer {
+  background-color: rgb(43, 90, 140); /* Footer background */
+  border-top: 1px solid rgb(106, 115, 135);
+}
+
+/* === FORM ELEMENTS === */
+.form-control,
+textarea.form-control {
+  background-color: rgb(69, 82, 106);
+  color: #fff;
+  border: 1px solid rgb(191, 195, 204);
+}
+
+.form-control::placeholder {
+  color: rgb(191, 195, 204);
+}
+
+/* === BADGES === */
+.badge {
+  background-color: rgb(56, 133, 201);
+  color: #fff;
+  font-weight: 500;
+  padding: 0.4em 0.6em;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.badge.bg-info {
+  background-color: rgb(68, 170, 250) !important;
+  color: rgb(35, 51, 78) !important;
+}
+
+/* === BUTTONS === */
+.btn-primary {
+  background-color: rgb(68, 170, 250);
+  border-color: rgb(68, 170, 250);
+}
+
+.btn-primary:hover {
+  background-color: rgb(56, 133, 201);
+  border-color: rgb(56, 133, 201);
+}
+
+.btn-outline-secondary {
+  color: rgb(191, 195, 204);
+  border-color: rgb(106, 115, 135);
+}
+
+.btn-outline-secondary:hover {
+  background-color: rgb(55, 106, 153);
+  border-color: rgb(55, 106, 153);
+  color: #fff;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-dark {
+  background-color: rgb(55, 106, 153);
+  border: none;
+  color: #fff;
+}
+
+.btn-dark:hover {
+  background-color: rgb(68, 170, 250);
+}
+
+.btn-success {
+  background-color: rgb(68, 170, 250);
+  border: none;
+  color: rgb(35, 51, 78);
+}
+
+.btn-success:hover {
+  background-color: rgb(56, 133, 201);
+  color: white;
+}
+
+/* === HEADINGS === */
+h4,
+h5 {
+  color: rgb(191, 195, 204);
+}
+/* For desktop view (md and above) */
+@media (min-width: 768px) {
+  #flash-message-container {
+    bottom: 0;
+    right: 0;
+    top: auto;
+    left: auto;
+  }
+}
+
+/* For mobile view (below md) */
+@media (max-width: 767.98px) {
+  #flash-message-container {
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: auto;
+  }
+}

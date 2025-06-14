@@ -1,0 +1,110 @@
+{% extends "base.html" %} {% block title %}Users{% endblock %} {% block content
+%}
+<div class="container mt-4" style="max-width: 800px">
+  <h3 class="text-light mb-4">Explore Users</h3>
+
+  <!-- Search Bar -->
+  <form method="POST" class="d-flex mb-4">
+    <input
+      type="text"
+      name="search"
+      class="form-control me-2"
+      placeholder="Search by username..."
+      value="{{ search_query }}"
+    />
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  <!-- Users with Projects -->
+  <div class="mb-5">
+    <h5 class="text-light mb-3">Users with Projects</h5>
+    <ul class="list-group">
+      {% for user in users_with_projects %}
+      <a
+        href="{{ url_for('user_project', user_id=user.id) }}"
+        class="list-group-item list-group-item-action"
+      >
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <img
+              src="https://api.dicebear.com/7.x/bottts/svg?seed={{ user.username }}"
+              alt="Avatar"
+              width="40"
+              height="40"
+              class="me-3 rounded-circle"
+            />
+            <div>
+              <strong>{{ user.username }}</strong><br />
+              <small class="text-muted">
+                {% if user.isOnline %}
+                <span class="text-success">Online</span>
+                {% else %} Seen {{ get_time_ago(user.last_seen) }} {% endif %}
+              </small>
+            </div>
+          </div>
+
+          <div class="text-end">
+            <small class="text-muted d-block mb-1">
+              {{ user.total_views }} views
+            </small>
+            <small class="text-muted">
+              {{ user.skills.split(',')[:3] | join(', ') if user.skills else 'No
+              skills' }}
+            </small>
+          </div>
+        </div>
+      </a>
+      {% else %}
+      <li class="list-group-item text-muted">No users found with projects.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Users without Projects -->
+  <div>
+    <h5 class="text-light mb-3">Users without Projects</h5>
+    <ul class="list-group">
+      {% for user in users_without_projects %}
+      <a
+        href="{{ url_for('user_project', user_id=user.id) }}"
+        class="list-group-item list-group-item-action"
+      >
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <img
+              src="https://api.dicebear.com/7.x/bottts/svg?seed={{ user.username }}"
+              alt="Avatar"
+              width="40"
+              height="40"
+              class="me-3 rounded-circle"
+            />
+            <div>
+              <strong>{{ user.username }}</strong><br />
+              <small class="text-muted">
+                {% if user.isOnline %}
+                <span class="text-success">Online</span>
+                {% else %} Last seen {{ get_time_ago(user.last_seen) }} {% endif
+                %}
+              </small>
+            </div>
+          </div>
+          <div class="text-end">
+            <small class="text-muted d-block mb-1">
+              {{ user.total_views }} views
+            </small>
+            <small class="text-muted">
+              {{ user.skills.split(',')[:3] | join(', ') if user.skills else 'No
+              skills' }}
+            </small>
+          </div>
+        </div>
+      </a>
+      {% else %}
+      <li class="list-group-item text-muted">
+        No users found without projects.
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,123 @@
+{# templates/users/user_projects.html #} {% extends 'base.html' %} {% block
+title %}{{ user.username }}'s Projects{% endblock %} {% block content %}
+<div class="container mt-5 pt-5 mt-sm-1 mb-sm-5">
+  <div class="row g-4">
+    <!-- LEFT SIDE: Profile -->
+    <div class="col-md-4">
+      <div class="card shadow-lg border-0">
+        <div class="card-body text-center">
+          <!-- Avatar -->
+          <img
+            src="https://api.dicebear.com/7.x/bottts/svg?seed={{ user.username }}"
+            alt="Avatar"
+            class="rounded-circle mb-3 border border-light"
+            width="120"
+            height="120"
+          />
+
+          <!-- Username + Online status -->
+          <h4
+            class="fw-bold text-light d-flex justify-content-center align-items-center gap-2"
+          >
+            {{ user.username }} {% if user.isOnline %}
+            <span
+              class="rounded-circle"
+              title="Online"
+              style="
+                width: 10px;
+                height: 10px;
+                background-color: green;
+                display: inline-block;
+              "
+            ></span>
+            {% else %}
+            <span
+              class="rounded-circle"
+              title="Offline"
+              style="
+                width: 10px;
+                height: 10px;
+                background-color: gray;
+                display: inline-block;
+              "
+            ></span>
+            {% endif %}
+          </h4>
+
+          <p class="text-light mb-1">{{ user.email }}</p>
+
+          {% if user.skills %}
+          <p class="mb-1"><strong>Skills:</strong> {{ user.skills }}</p>
+          {% endif %} {% if user.user_description %}
+          <p class="mb-1">
+            <strong>About:</strong> {{ user.user_description }}
+          </p>
+          {% endif %}
+
+          <p class="mb-2">
+            <strong>Total Views:</strong> {{ user.total_views }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE: Projects -->
+    <div class="col-md-8">
+      <h4 class="mb-3 text-light">{{ user.username }}'s Projects</h4>
+
+      {% if user.projects %}
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for project in user.projects %}
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0 position-relative">
+            <div class="card-body">
+              <span
+                class="position-absolute top-0 end-0 m-2 badge bg-primary d-flex align-items-center gap-1"
+              >
+                <i class="bi bi-eye"></i> {{ project.views }}
+              </span>
+
+              <h5 class="card-title">{{ project.title }}</h5>
+              <p class="text-light text-opacity-50 small mb-2">
+                Created on: {{ project.created_at.strftime('%d %b %Y') }}
+              </p>
+              <p class="card-text">{{ project.description }}</p>
+              <span class="badge bg-info text-dark"
+                >{{ project.technologies }}</span
+              >
+            </div>
+
+            <div
+              class="card-footer d-flex flex-wrap justify-content-between gap-2"
+            >
+              <div class="d-flex gap-2">
+                <a
+                  href="{{ url_for('visit_github', project_id=project.id) }}"
+                  class="btn btn-sm btn-dark"
+                  target="_blank"
+                >
+                  GitHub
+                </a>
+
+                {% if project.host_link %}
+                <a
+                  href="{{ url_for('visit_host', project_id=project.id) }}"
+                  class="btn btn-sm btn-success"
+                  target="_blank"
+                >
+                  Live Site
+                </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-light">No projects found.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

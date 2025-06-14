@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block title %}Add Project{% endblock %} {% block
+content %}
+<div class="container mt-5 position-relative" style="max-width: 600px">
+  <div class="glass-card p-4 text-light position-relative">
+    <a
+      href="{{ url_for('dashboard') }}"
+      class="btn btn-outline-light btn-sm back-btn"
+      >← Back</a
+    >
+    <h3 class="mb-4 text-center">Add Project</h3>
+    <form method="POST">
+      <div class="mb-3">
+        <label for="title" class="form-label">Project Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          class="form-control"
+          id="description"
+          name="description"
+          rows="3"
+          required
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="github_link" class="form-label">GitHub Link</label>
+        <input
+          type="url"
+          class="form-control"
+          id="github_link"
+          name="github_link"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="host_link" class="form-label">Hosted Link (optional)</label>
+        <input
+          type="url"
+          class="form-control"
+          id="host_link"
+          name="host_link"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="technologies" class="form-label">Technologies Used</label>
+        <input
+          type="text"
+          class="form-control"
+          id="technologies"
+          name="technologies"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Add Project</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block title %}KangsBoard Login{% endblock %} {%
+block content %}
+
+<div
+  class="container d-flex justify-content-center align-items-center min-vh-100"
+>
+  <div class="glass-card p-4">
+    <h2 class="text-center mb-4">Login to KangsBoard</h2>
+    <form method="POST">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          class="form-control input-field"
+          id="username"
+          name="username"
+          placeholder="Enter username"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">🔒 Password</label>
+        <input
+          type="password"
+          class="form-control input-field"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary w-100 mt-3 shadow-sm">
+        Login
+      </button>
+    </form>
+    <p class="text-center text-light mt-3">
+      New to KangsBoard?
+      <a href="/signup" class="text-decoration-none text-info"
+        >Create an account</a
+      >
+    </p>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,5 @@
+flask==2.3.3
+peewee==3.17.1
+mysql-connector-python==9.0.0
+gunicorn==23.0.0
+python-dotenv==1.0.1

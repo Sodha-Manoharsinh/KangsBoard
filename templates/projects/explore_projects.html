@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}Explore Projects{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h3 class="text-light mb-4">Explore Projects</h3>
+
+  <!-- Search & Filter -->
+  <form method="POST" class="row g-3 mb-4 align-items-end">
+    <div class="col-md-5">
+      <label class="form-label text-light">Search by Project Title</label>
+      <input
+        type="text"
+        name="search"
+        class="form-control"
+        placeholder="e.g. Portfolio, Weather App"
+        value="{{ search_query }}"
+      />
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label text-light">Filter by Skill</label>
+      <select name="skill" class="form-select">
+        <option value="">All Skills</option>
+        {% for skill in all_skills %}
+        <option value="{{ skill }}" {% if skill == selected_skill %}selected{% endif %}>
+          {{ skill }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-3">
+      <button type="submit" class="btn btn-primary w-100">Apply</button>
+    </div>
+  </form>
+
+  <!-- Grid of Projects -->
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    {% for project in projects %}
+    <div class="col">
+      <div class="card h-100 shadow-sm border-0 position-relative">
+        <div class="card-body">
+          <span
+            class="position-absolute top-0 end-0 m-2 badge bg-primary d-flex align-items-center gap-1"
+          >
+            <i class="bi bi-eye"></i> {{ project.views }}
+          </span>
+
+          <h5 class="card-title mt-3">{{ project.title }}</h5>
+
+          <p class="text-light text-opacity-50 small mb-2">
+            Created on: {{ project.created_at.strftime('%d %b %Y') }}
+          </p>
+
+          <p class="card-text">{{ project.description }}</p>
+
+          <span class="badge bg-info text-dark">{{ project.technologies }}</span>
+        </div>
+
+        <div class="card-footer d-flex flex-wrap justify-content-between gap-2">
+          <div class="d-flex gap-2">
+            <a
+              href="{{ url_for('visit_github', project_id=project.id) }}"
+              target="_blank"
+              class="btn btn-sm btn-dark"
+            >
+              GitHub
+            </a>
+            {% if project.host_link %}
+            <a
+              href="{{ url_for('visit_host', project_id=project.id) }}"
+              target="_blank"
+              class="btn btn-sm btn-success"
+            >
+              Live Site
+            </a>
+            {% endif %}
+          </div>
+
+          <div class="text-end ms-auto">
+            <small class="text-light">
+              by
+              <a
+                href="{{ url_for('user_project', user_id=project.user.id) }}"
+                class="text-decoration-underline text-light"
+              >
+                {{ project.user.username }}
+              </a>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <p class="text-light">No matching projects found.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

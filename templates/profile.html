@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block title %}Profile{% endblock %} {% block
+content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <!-- Profile Card -->
+      <div class="card shadow-lg rounded-4">
+        <div class="card-body text-center p-4">
+          <!-- Avatar -->
+          <img
+            src="https://api.dicebear.com/7.x/bottts/svg?seed={{ user.username }}"
+            alt="Avatar"
+            class="rounded-circle mb-3"
+            width="120"
+            height="120"
+          />
+
+          <!-- User Info -->
+          <h3 class="card-title">{{ user.username }}</h3>
+          <p class="text-info mb-2">{{ user.email }}</p>
+
+          {% if user.isOnline %}
+          <span class="badge bg-success">Online</span>
+          {% else %}
+          <span class="badge bg-secondary"
+            >Last seen: {{ get_time_ago(user.last_seen) }}</span
+          >
+          {% endif %}
+
+          <hr class="my-4" />
+
+          <!-- Stats -->
+          <p><strong>Total Projects:</strong> {{ project_count }}</p>
+
+          {% if user.skills %}
+          <p><strong>Skills:</strong> {{ user.skills }}</p>
+          {% endif %} {% if user.user_description %}
+          <p><strong>About Me:</strong> {{ user.user_description }}</p>
+          {% endif %}
+
+          <!-- Buttons -->
+          <div class="mt-4 d-grid gap-2">
+            <a
+              href="{{ url_for('edit_profile') }}"
+              class="btn btn-outline-primary"
+              >Edit Profile</a
+            >
+            <a href="{{ url_for('logout') }}" class="btn btn-outline-warning"
+              >Logout</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
